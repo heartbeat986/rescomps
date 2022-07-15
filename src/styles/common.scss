@@ -1,0 +1,612 @@
+@import './mixin.scss';
+/* 清楚浮动 */
+.clearfloat:after {
+  display: block;
+  clear: both;
+  content: '';
+  visibility: hidden;
+  height: 0;
+}
+
+.clearfloat {
+  zoom: 1;
+  font-size: 14px;
+}
+// 单行文字溢出时出现省略号，需设定宽度
+.ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pointer {
+  cursor: pointer;
+}
+.underline {
+  text-decoration: underline;
+}
+.bold {
+  font-weight: bold;
+}
+.center {
+  text-align: center;
+}
+.font-16 {
+  font-size: 16px;
+}
+.m-lr-4 {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.bg-white {
+  background-color: #fff;
+}
+// 按钮公共样式
+button {
+  border-radius: 1px;
+  text-align: center;
+  background-color: $font_color_4;
+  color: $main_color;
+  border: 1px solid $main_color;
+  border-radius: 4px;
+  padding: 10px 12px;
+  height: 36px;
+  font-size: 14px;
+  img {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+  &.isflex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &:hover {
+    background-color: $main_hover_color_fade;
+  }
+  &.round {
+    border-radius: 50%;
+  }
+  &.level_0 {
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    padding: 0;
+    // &.round {
+    //   border-radius: 18px;
+    // }
+  }
+  &.level_1 {
+    width: 108px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    padding: 0;
+  }
+  &.level_2 {
+    width: 96px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 14px;
+    padding: 0;
+  }
+  &.level_3 {
+    width: 72px;
+    height: 24px;
+    line-height: 18px;
+    font-size: 12px;
+    padding: 0;
+    border-radius: 2px;
+  }
+  &.level_4 {
+    width: 64px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 14px;
+    padding: 0;
+    &.round {
+      border-radius: 16px;
+    }
+  }
+  &.level_5 {
+    width: 136px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    padding: 0;
+    &.round {
+      border-radius: 16px;
+    }
+  }
+  &.level_small {
+    padding: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+  }
+
+  &.btn + .btn {
+    margin-left: 8px;
+  }
+  &.level_5 + .level_5 {
+    margin-left: 12px;
+  }
+  &.round {
+    border-radius: 9999999px;
+  }
+  &.main_btn {
+    background-color: $main_color;
+    color: #fff;
+    border-color: $main_color;
+    position: relative;
+    overflow: hidden;
+    &.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    &:hover {
+      background-color: $main_color;
+      color: #fff;
+      border-color: $main_color;
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        height: 102%;
+        width: 102%;
+        background-color: rgba($color: #000000, $alpha: 0.16);
+      }
+    }
+  }
+  &.border_btn {
+    background-color: #fff;
+    color: $main_color;
+    border-color: $main_color;
+    &:hover {
+      background-color: #fff;
+      color: $main_color;
+      background-color: $main_hover_color;
+    }
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  &.plain_btn {
+    background: #ffffff;
+    border: 1px solid $fill_color_7;
+    color: $font_color_2;
+    &:hover {
+      border-color: $main_color;
+      color: $main_color;
+    }
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      &:hover {
+        border-color: $fill_color_7;
+        color: $font_color_5;
+        background-color: $fill_color_2;
+      }
+    }
+  }
+  &.icon_btn {
+    background: #ffffff;
+    border: 1px solid $main_color;
+    color: $main_color;
+    position: relative;
+    overflow: hidden;
+    background-clip: border-box;
+    &:hover {
+      background-color: $main_color;
+      color: #ffffff;
+    }
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      &:hover {
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0px;
+          top: 0px;
+          right: 0px;
+          bottom: 1px;
+          // border: 1px;
+          // border-color: rgba($color: #000000, $alpha: 0.16);
+          background-color: rgba($color: #000000, $alpha: 0.16);
+        }
+      }
+    }
+  }
+  &.icon-text_btn {
+    border: none;
+    background-color: transparent;
+    padding: 0 4px;
+    color: $font_color_1;
+    &.type1 {
+      color: $main_color;
+    }
+    &:hover {
+      background-color: $main_hover_color;
+    }
+    &.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+  // &.text_btn {
+  //   background: #ffffff;
+  //   border: 1px solid $fill_color_3;
+  //   color: $font_color_2;
+  //   &:hover {
+  //     border-color: $main_color;
+  //     color: $main_color;
+  //   }
+  //   &.disabled {
+  //     opacity: 0.5;
+  //     cursor: not-allowed;
+  //     &:hover {
+  //       border-color: $fill_color_7;
+  //       color: $font_color_5;
+  //       background-color: $fill_color_2;
+  //     }
+  //   }
+  // }
+  &.form-cancel_btn {
+    background-color: $fill_color_4;
+    color: $font_color_2;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    &.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    &:hover {
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        height: 102%;
+        width: 100%;
+        border: 1px;
+        background-color: rgba($color: #000000, $alpha: 0.16);
+      }
+    }
+  }
+  &.form-danger_btn {
+    background-color: $sub_color_red;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    &.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    &:hover {
+      background-color: $sub_color_red;
+      color: #ffffff;
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        height: 102%;
+        width: 100%;
+        border: 1px;
+        background-color: rgba($color: #000000, $alpha: 0.16);
+      }
+    }
+  }
+  &.form-level1_infour {
+    padding: 0;
+    width: 72px;
+    height: 36px;
+  }
+  &.form-level1_outfour {
+    padding: 0;
+    width: 108px;
+    height: 36px;
+  }
+  &.form-level2_infour {
+    padding: 0;
+    line-height: 20px;
+    width: 64px;
+    height: 32px;
+  }
+  &.form-level2_infive {
+    padding: 0;
+    line-height: 20px;
+    width: 96px;
+    height: 32px;
+  }
+  &.form-level2_auto {
+    width: auto;
+    padding: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 32px;
+    line-height: 20px;
+  }
+
+  &.red_btn {
+    background-color: $sub_color_red;
+    color: #ffffff;
+    border: 0;
+    &:hover {
+      background-color: $sub_hover_color_red !important;
+    }
+  }
+  &.red_btn.plain {
+    color: $sub_color_red;
+    border: 1px solid $sub_color_red;
+    background-color: #fff;
+    &:hover {
+      background-color: $sub_hover_color_red_fade !important;
+    }
+  }
+  &.text_btn {
+    border: 0;
+    color: $font_color_1;
+    &:hover {
+      background-color: $fill_color_3;
+    }
+  }
+  &.red_text_btn {
+    border: 0;
+    color: $sub_color_red;
+    &:hover {
+      background-color: $fill_color_3;
+    }
+  }
+  &.clear_btn {
+    // 清空表格
+    border-color: $fill_color_6;
+    color: $sub_color_red;
+  }
+  // &.disabled {
+  //   background-color: $font_color_4;
+  //   color: $font_color_5;
+  //   border-color: $main_color_disabled;
+  //   cursor: not-allowed;
+  //   &:hover {
+  //     background-color: $fill_color_10;
+  //   }
+  // }
+  // &.disabled.plain {
+  //   background-color: $fill_color_4;
+  //   border-color: $fill_color_5;
+  //   &:hover {
+  //     background-color: $fill_color_3;
+  //   }
+  // }
+  // &.disabled.main_btn {
+  //   color: #fff;
+  //   background-color: $main_color_disabled;
+  //   &:hover {
+  //     background-color: $main_color_hover_disabled;
+  //   }
+  // }
+
+  // 表格操作
+  &.td-btn,
+  &.td-md-btn {
+    width: 72px;
+    height: 24px;
+    padding: 0;
+    line-height: 24px;
+    font-size: 12px;
+    background: $font_color_4;
+    border: 1px solid $fill_color_6;
+    border-radius: 13px;
+    &:hover {
+      border-color: $fill_color_1;
+    }
+    & + .td-btn,
+    & + .td-md-btn {
+      margin-left: 8px;
+    }
+  }
+  &.td-md-btn {
+    width: 84px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+    border-radius: 24px;
+  }
+  &.noborder {
+    border: 0 !important;
+  }
+  &.auto {
+    padding: 0 12px;
+    width: auto;
+  }
+}
+// tag
+.tag-txt {
+  display: inline-block;
+  padding: 0 6px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  color: $sub_color_yellow;
+  background: $sub_hover_color_yellow_fade !important;
+  text-align: center;
+  border-radius: 0 10px 10px 10px;
+  & + .tag-txt {
+    margin-left: 2px;
+  }
+}
+// 主页面布局
+.layout-page {
+  width: 100%;
+  height: 100%;
+}
+.page-center-container {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
+  padding-left: 240px;
+  padding-right: 240px;
+  padding-top: 60px;
+  -webkit-transition: padding 0.28s;
+  transition: padding 0.28s;
+}
+.page-container {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
+  padding-left: 240px;
+  padding-top: 108px;
+  -webkit-transition: padding 0.28s;
+  transition: padding 0.28s;
+  .page-left {
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    width: 240px;
+    height: calc(100% - 60px);
+    -webkit-transition: width 0.28s;
+    transition: width 0.28s;
+    background-color: #fff;
+    overflow-y: auto;
+    z-index: 999;
+  }
+  .page-con {
+    position: relative;
+    height: 100%;
+  }
+}
+.sub-page-con {
+  padding: 16px;
+  height: 100%;
+}
+.breadcrumb-wrap {
+  color: $font_color_2;
+  @include flex-row(flex-start, center);
+}
+.center-wrap {
+  position: relative;
+  padding: 16px;
+  background-color: #fff;
+  min-height: calc(100% - 84px);
+}
+// 批量操作栏
+.page-toolbar {
+  position: fixed;
+  top: 60px;
+  left: 240px;
+  right: 0;
+  padding: 8px 16px 8px 26px;
+  height: 48px;
+  background-color: $fill_color_3;
+  z-index: 998;
+  .bar_btn.el-button--text {
+    margin: 4px 0 4px 16px;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 12px;
+    color: $font_color_2;
+    em {
+      float: left;
+      margin-top: 2px;
+      margin-right: 4px;
+      width: 18px;
+      height: 18px;
+    }
+    &:hover,
+    &:focus {
+      border-color: $font_color_4;
+      color: $font_color_1;
+      background-color: $font_color_4;
+      border-radius: 12px;
+    }
+  }
+}
+// 副标题样式
+.page-subtitle {
+  display: flex;
+  padding: 0 0 16px;
+  justify-content: space-between;
+  .sub-title {
+    line-height: 32px;
+    font-size: 20px;
+    font-weight: 400;
+    color: $font_color_1;
+  }
+}
+// 缺省白色背景色
+.bg-default {
+  position: relative;
+  min-height: calc(100% - 48px);
+  background-color: $font_color_4;
+}
+.padding-top-60 {
+  padding-top: 60px;
+}
+.padding-top-108 {
+  padding-top: 108px;
+}
+// 左侧按钮菜单
+.menu-inner {
+  padding: 16px;
+}
+.menu-group {
+  padding-bottom: 16px;
+  .menu-group-title {
+    margin-bottom: 16px;
+    color: $font_color_2;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .menu-btn-group {
+    margin-bottom: 8px;
+    .btn-menu {
+      margin: 0 16px 8px 0;
+      width: 96px;
+      height: 36px;
+      line-height: 36px;
+      font-size: 16px;
+      border-color: $fill_color_6;
+      color: $font_color_1;
+      padding: 0;
+      &.active,
+      &:hover {
+        border-color: $fill_color_1;
+        background-color: $fill_color_1;
+        color: $fill_color_3;
+      }
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+      &.auto {
+        padding: 0 15px;
+        width: auto;
+      }
+    }
+  }
+}
+.page-left {
+  .el-scrollbar {
+    .el-scrollbar__wrap {
+      overflow: auto;
+    }
+  }
+}
+.mt-16 {
+  margin-top: 16px;
+}

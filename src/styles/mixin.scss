@@ -1,0 +1,118 @@
+//定义公共样式，可复用
+@mixin clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+@mixin flex-row($jc, $ai) {
+  display: flex;
+  flex-direction: row;
+  justify-content: $jc;
+  align-items: $ai;
+}
+
+@mixin flex-column($jc, $ai) {
+  display: flex;
+  flex-direction: column;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin bg-image($url) {
+  background-image: url($url + '.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+    background-image: url($url + '@2x.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+}
+
+// 字体颜色 正文文字
+$font_color_1: #000000;
+// 次要文本
+$font_color_2: #333333;
+// 辅助文本
+$font_color_3: #666666;
+// 主色、深色的反白 不可点击按钮的白色文字
+$font_color_4: #999999;
+
+$font_color_5: #b3b3b3;
+$font_color_6: #cccccc;
+$font_color_7: #7e8299;
+
+// 填充色
+// 50%透明度 遮罩层BG
+$fill_color_1: #000000;
+// 比选中的深一点
+$fill_color_2: #e5e5e5;
+// 选中/表头
+$fill_color_3: #eeeeee;
+// 由#F0F1F5 在白色画布上50%透明度混合而成 画板背景色
+$fill_color_4: #f2f2f2;
+// 由#F3F6F9 在白色画布上50%透明度混合而成 比画板背景浅的灰色背景
+$fill_color_5: #f8f8f8;
+// 分割线/边框
+// 常规分割线/边框
+$fill_color_6: #e6e6e6;
+// 加强分割线/边框
+$fill_color_7: #dddddd;
+$fill_color_8: #fa5757;
+$fill_color_9: #46495b;
+// 禁用色
+$fill_color_10: #f8f9fb;
+
+//背景色
+$bgColor: #f2f3f7;
+
+$main_color: #1cbc9c;
+$main_sub_color: #0aa888;
+$main_hover_color: #f2fcfa;
+$main_hover_color_fade: #d1d3de;
+$main_color_disabled: #a2a3ac;
+$main_color_hover_disabled: #bdbec5;
+$table_color_warning: #fffb7e;
+$table_color_error: #ff97a8;
+
+$sub_color_yellow: #ff8658;
+$sub_hover_color_yellow_fade: #faf0ed;
+
+$sub_color_red: #ff4040;
+$sub_hover_color_red: #f83d3d;
+$sub_hover_color_red_fade: #fcf2f4;
+
+$sub_color_green: #29cb97;
+$sub_hover_color_green_fade: #f2fcf5;
+
+$sub_color_grey: #b7b7c5;
+
+.main_color {
+  color: $main_color;
+}
+.sub_color_yellow {
+  color: $sub_color_yellow;
+}
+.sub_color_red {
+  color: $sub_color_red;
+}
+.sub_color_blue {
+  color: $sub_color_green;
+}
+.sub_color_grey {
+  color: $sub_color_grey !important;
+}
+
+.font_color_1 {
+  color: $font_color_1;
+}
+.font_color_2 {
+  color: $font_color_2;
+}
+.font_color_3 {
+  color: $font_color_3;
+}
+.font_color_4 {
+  color: $font_color_4;
+}
