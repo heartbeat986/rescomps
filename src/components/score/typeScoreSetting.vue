@@ -4,7 +4,7 @@
  * @Author: jiaoxingxing
  * @Date: 2022-01-24 13:35:18
  * @LastEditors: jiaoxingxing
- * @LastEditTime: 2022-07-09 10:31:16
+ * @LastEditTime: 2022-06-16 17:09:54
 -->
 <template>
   <tip-dialog v-model="dialogVisible" :type="2" title="分数设置">
@@ -30,6 +30,8 @@
 <script>
 import tipDialog from '@/components/dialog/tipDialog'
 import loadingBtn from '@/components/common/loadingBtn'
+// import paperEditType from '@/store/type/paperEditType'
+// import { mapGetters, mapActions } from 'vuex'
 import { ScoreCalculateMixin } from '@/mixins/scoreCalculateMixin'
 import typeScoreSetView from './typeScoreSetView'
 import ScoreAction from '@/utils/scoreAction'
@@ -69,6 +71,7 @@ export default {
     }
   },
   computed: {
+    // ...mapGetters(['paperData', 'reviewPaperData', 'paperId', 'reviewPaperId']),
     dialogVisible: {
       get() {
         return this.value
@@ -80,14 +83,69 @@ export default {
   },
   watch: {},
   mounted() {
-    this.scoreAction = new ScoreAction(this.$store, this.storeType)
+    this.scoreAction = new ScoreAction(this.storeType)
   },
   methods: {
+    // ...mapActions({
+    // setScore: homeworkType.DO_SET_SCORE
+    // reviewSetScore: homeworkType.DO_SET_SCORE
+    // }),
     doClose() {
       this.dialogVisible = false
     },
     doSettingScore() {
       return this.scoreAction.doSetTypeScore(this, this.typeData)
+      // eslint-disable-next-line no-async-promise-executor
+      // return new Promise(async (resolve) => {
+      //   // 更新试卷数据
+      //   try {
+      //     let setView = this.$refs.setView
+      //     if (setView) {
+      //       setView.validateForm(async (result, validaError, setData) => {
+      //         if (result) {
+      //           this.datas = setData.datas
+      //           let paperData = this.updateData(setData)
+      //           let questionScoreFormList = this.getScoreParams()
+      //           let paperId = this.isReview ? this.reviewPaperId : this.paperId
+      //           let params = {
+      //             paperId: paperId,
+      //             paperQuestionGroupId: this.typeData.id,
+      //             paperQuestionGroupName: setData.typeTitle,
+      //             questionScoreFormList: questionScoreFormList,
+      //             type: 1
+      //           }
+      //           try {
+      //             if (this.isReview) {
+      //               await this.reviewSetScore({ params, paperData })
+      //             } else {
+      //               await this.setScore({ params, paperData })
+      //             }
+      //             this.dialogVisible = false
+      //             this.$message.success('设置成功')
+      //             resolve(true)
+      //           } catch (error) {
+      //             resolve(false)
+      //             this.$message.error(error.message)
+      //           }
+      //         } else {
+      //           resolve(false)
+      //           console.log(validaError)
+      //           let keys = Object.keys(validaError)
+      //           if (keys && keys.length > 0) {
+      //             let firstKey = keys[0]
+      //             console.log(firstKey)
+      //             let errorItem = document.getElementById(firstKey)
+      //             console.log(errorItem.offsetTop)
+      //             setView.scrollFromToError(errorItem)
+      //           }
+      //         }
+      //       })
+      //     }
+      //   } catch (error) {
+      //     resolve(false)
+      //     this.$message.error(`${error.message}`)
+      //   }
+      // })
     },
     updateData(setData) {
       console.log('setData:', setData)

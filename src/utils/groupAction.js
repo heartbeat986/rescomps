@@ -4,7 +4,7 @@
  * @Author: jiaoxingxing
  * @Date: 2022-06-13 15:39:43
  * @LastEditors: jiaoxingxing
- * @LastEditTime: 2022-07-09 10:24:19
+ * @LastEditTime: 2022-07-15 16:06:34
  */
 /*
 model:{
@@ -22,9 +22,9 @@ model:{
 }
 */
 import { message } from '@/utils/overrideMessage'
+import store from '@/store/index.js'
 export default class GroupAction {
-  constructor(store, operationData, storeType) {
-    this.store = store
+  constructor(operationData, storeType) {
     this.operationData = operationData
     this.dataModel = store.getters[storeType.DATAMODEL]
     this.storeType = storeType
@@ -121,8 +121,8 @@ export default class GroupAction {
     console.log('this.operationData:', this.operationData)
     try {
       console.log('storeType:', this.sortType)
-      await this.store.dispatch(this.storeType.UPDATE_PAPER_ORDER, params)
-      let operationData = this.store.getters[this.storeType.OPERATION_DATA]
+      await store.dispatch(this.storeType.UPDATE_PAPER_ORDER, params)
+      let operationData = store.getters[this.storeType.OPERATION_DATA]
       this.operationData = _.cloneDeep(operationData)
     } catch (error) {
       // 出现错误时还原
@@ -140,8 +140,8 @@ export default class GroupAction {
     console.log('题组内移动题:', params)
     try {
       // this.updatePaperData(_.cloneDeep(this.copyPaperData))
-      await this.store.dispatch(this.storeType.UPDATE_PAPER_ORDER, params)
-      let operationData = this.store.getters[this.storeType.OPERATION_DATA]
+      await store.dispatch(this.storeType.UPDATE_PAPER_ORDER, params)
+      let operationData = store.getters[this.storeType.OPERATION_DATA]
       console.log('获取操作数据:', operationData)
       this.operationData = _.cloneDeep(operationData)
     } catch (error) {

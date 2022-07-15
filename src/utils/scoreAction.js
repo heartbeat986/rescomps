@@ -4,7 +4,7 @@
  * @Author: jiaoxingxing
  * @Date: 2022-06-16 10:24:27
  * @LastEditors: jiaoxingxing
- * @LastEditTime: 2022-07-09 10:23:06
+ * @LastEditTime: 2022-06-22 13:56:46
  */
 /*
 model:{
@@ -34,12 +34,9 @@ model:{
 }
 */
 import { message } from '@/utils/overrideMessage'
+import store from '@/store/index.js'
 export default class ScoreAction {
-  constructor(store, storeType) {
-    if (!storeType.DATAMODEL) {
-      throw new Error('storeType error: 需要指定数据模型.')
-    }
-    this.store = store
+  constructor(storeType) {
     this.dataModel = store.getters[storeType.DATAMODEL]
     this.storeType = storeType
     this.datas = []
@@ -49,7 +46,7 @@ export default class ScoreAction {
     try {
       let qDatas = []
       let checkNumCount = 0
-      let editData = this.store.getters[this.storeType.OPERATION_DATA]
+      let editData = store.getters[this.storeType.OPERATION_DATA]
       let data = _.cloneDeep(editData[this.dataModel.groupListKey])
       for (let tIndex = 0; tIndex < data.length; tIndex++) {
         let typeItem = data[tIndex]
@@ -82,7 +79,7 @@ export default class ScoreAction {
 
   // 把平面数组还原
   updateQuestionData() {
-    let editData = this.store.getters[this.storeType.OPERATION_DATA]
+    let editData = store.getters[this.storeType.OPERATION_DATA]
     let list = _.cloneDeep(editData[this.dataModel.groupListKey])
     let paperData = _.cloneDeep(editData)
     let listData = _.cloneDeep(list)
@@ -135,14 +132,11 @@ export default class ScoreAction {
               }
               params[this.dataModel.idKey] = paperId
               try {
-                await this.store.dispatch(this.storeType.DO_SET_SCORE, {
+                await store.dispatch(this.storeType.DO_SET_SCORE, {
                   params,
                   paperData
                 })
-                this.store.commit(
-                  this.storeType.PAPER_UPDATE_SCORE_M,
-                  totalScore
-                )
+                store.commit(this.storeType.PAPER_UPDATE_SCORE_M, totalScore)
                 // 更新总分数
                 resolve(true)
                 message.success('设置成功')
@@ -187,14 +181,14 @@ export default class ScoreAction {
                 type: 1
               }
               params[this.dataModel.idKey] =
-                this.store.getters[this.storeType.OPERATION_DATA][
+                store.getters[this.storeType.OPERATION_DATA][
                   this.dataModel.idKey
                 ]
               params[this.dataModel.groupIdKey] =
                 typeData[this.dataModel.groupIdKey]
               params[this.dataModel.groupNamekey] = setData.typeTitle
               try {
-                await this.store.dispatch(this.storeType.DO_SET_SCORE, {
+                await store.dispatch(this.storeType.DO_SET_SCORE, {
                   params,
                   paperData
                 })
@@ -226,6 +220,62 @@ export default class ScoreAction {
     })
   }
   getTypeScoreParams(datas) {
+    // let typeQItems = []
+    // for (let qindex = 0; qindex < datas.length; qindex++) {
+    //   const qItem = datas[qindex]
+    //   let formItem = {}
+    //   formItem[this.dataModel.showChildKey] = qItem[this.dataModel.showChildKey]
+    //   formItem[this.dataModel.paramQuestionIdKey] =
+    //     qItem[this.dataModel.paramQuestionIdKey]
+    //   formItem.questionBlankScoreForms = []
+    //   formItem.score = qItem.score
+    //   let childScoreForms = []
+    //   let questionBlankScoreForms = []
+    //   // 子类型
+    //   // child代替children封装
+    //   if (qItem.child.length > 0) {
+    //     for (
+    //       let sindex = 0;
+    //       sindex < qItem[this.dataModel.childrenKey].length;
+    //       sindex++
+    //     ) {
+    //       let subItem = qItem[this.dataModel.childrenKey][sindex]
+    //       let subItemChild = qItem[this.dataModel.childrenKey][sindex]
+    //       let childFormItem = {}
+    //       childFormItem.paperQuestionId = subItemChild.paperQuestionId
+    //       childFormItem.score = subItem.score
+    //       let blankScoreForms = []
+    //       if (subItem?.questionBlanks && subItem.questionBlanks.length > 0) {
+    //         for (
+    //           let bindex = 0;
+    //           bindex < subItem.questionBlanks.length;
+    //           bindex++
+    //         ) {
+    //           let blankItem = {}
+    //           const subItemBlankItem = subItem.questionBlanks[bindex]
+    //           blankItem.paperBlankQuestionId =
+    //             subItemBlankItem.paperQuestionBlankId
+    //           blankItem.score = subItemBlankItem.score
+    //           blankScoreForms.push(blankItem)
+    //         }
+    //         childFormItem.blankScoreForms = blankScoreForms
+    //       }
+    //       childScoreForms.push(childFormItem)
+    //     }
+    //   } else if (qItem.questionBlanks.length > 0) {
+    //     for (let bindex = 0; bindex < qItem.questionBlanks.length; bindex++) {
+    //       let subBlankItem = qItem.questionBlanks[bindex]
+    //       let childBlankFormItem = {}
+    //       childBlankFormItem.paperBlankQuestionId =
+    //         subBlankItem.paperQuestionBlankId
+    //       childBlankFormItem.score = subBlankItem.score
+    //       questionBlankScoreForms.push(childBlankFormItem)
+    //     }
+    //   }
+    //   formItem.childScoreForms = childScoreForms
+    //   formItem.blankScoreForms = questionBlankScoreForms
+    //   typeQItems.push(formItem)
+    // }
     let groupItem = {}
     groupItem[this.dataModel.questionListKey] = datas
     return this.getTypeItemForms(groupItem)
@@ -233,9 +283,7 @@ export default class ScoreAction {
   updateData(setData, typeData) {
     console.log('setData:', setData)
     // let pdata = this.isReview ? this.reviewPaperData : this.paperData
-    let paperData = _.cloneDeep(
-      this.store.getters[this.storeType.OPERATION_DATA]
-    )
+    let paperData = _.cloneDeep(store.getters[this.storeType.OPERATION_DATA])
     let targetType = null
     let targetIndex = -1
     for (

@@ -1,7 +1,7 @@
 /*
  * @Author: jiaoxingxing
  * @Date: 2021-08-28 16:07:05
- * @LastEditTime: 2022-07-09 10:18:41
+ * @LastEditTime: 2022-07-15 16:09:36
  * @LastEditors: jiaoxingxing
  * @Description:
  * @FilePath: \jty-template-web\src\main.js
@@ -18,7 +18,6 @@ import '@/styles/common.scss' // 公共css
 import '@/styles/overclass.scss' // 公共css
 
 import App from './App'
-// import store from './store'
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 import { message } from '@/utils/overrideMessage'

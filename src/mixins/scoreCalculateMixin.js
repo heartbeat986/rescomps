@@ -4,7 +4,7 @@
  * @Author: jiaoxingxing
  * @Date: 2022-02-25 10:49:09
  * @LastEditors: jiaoxingxing
- * @LastEditTime: 2022-07-09 10:01:55
+ * @LastEditTime: 2022-07-15 16:07:50
  */
 export const ScoreCalculateMixin = {
   data() {
@@ -17,6 +17,7 @@ export const ScoreCalculateMixin = {
   methods: {
     setDataModel(dataModel) {
       this.dataModel = dataModel
+      console.log('设置了dataModel:', dataModel)
     },
     getTypeTotalScore(datas) {
       let score = 0
@@ -28,6 +29,7 @@ export const ScoreCalculateMixin = {
       return score
     },
     getDescendantScore(index) {
+      console.log('获取分数')
       let allScore = 0
       let qItem = this.datas[index]
       if (
