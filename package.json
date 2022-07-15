@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint",
     "prepare": "husky install"
   },
+  "main": "index.js",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
